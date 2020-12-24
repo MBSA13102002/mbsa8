@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            height: 200px;
+            width: 200px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+Image Name <input id="namebox" type="text"><br><br>
+<img id="myimg"><label id="UpProgress"></label><br><br>
+
+<button id="select">select image</button>
+<button id="upload">upload image</button>
+<button id="retrieve">retrieve image</button>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+<script id="MainScript">
+        var ImgName, ImgUrl;
+        var files = [];
+        var reader;
+        //------------------------------------CONFIGURATION-------------------------
+        var firebaseConfig = {
+            apiKey: "AIzaSyBQUpIYvs0WKfP5IMD4TE2IWTvpb5U34Cc",
+            authDomain: "portfoliomanagement-16f09.firebaseapp.com",
+            databaseURL: "https://portfoliomanagement-16f09.firebaseio.com",
+            projectId: "portfoliomanagement-16f09",
+            storageBucket: "portfoliomanagement-16f09.appspot.com",
+            messagingSenderId: "505793158040",
+            appId: "1:505793158040:web:14b9466a349235ef8b69ed",
+            measurementId: "G-MRCWJ4R5RJ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        //========================SELECTION PROCESS================
+        document.getElementById("select").onclick = function (e) {
+            var input = document.createElement('input');
+            input.type = 'file';
+
+
+            input.onchange = e => {
+                files = e.target.files;
+                reader = new FileReader();
+                reader.onload = function () {
+                    document.getElementById("myimg").src = reader.result;
+                }
+                reader.readAsDataURL(files[0]);
+            }
+            input.click();
+        }
+        //==========================UPLOAD PROCESS======================================
+        document.getElementById("upload").onclick = function () {
+            ImgName = document.getElementById('namebox').value;
+            var uploadTask = firebase.storage().ref("Images/" + ImgName + ".png").put(files[0]);
+
+          uploadTask.on('state_chnaged', function(snapshot){
+                var progress = (snapshot.bytesTransferred/ snapshot.totalBytes)*100;
+                document.getElementById('UpProgress').innerHTML='UPLOAD'+progress+'%';
+          },
+          function(error){
+            document.getElementById('UpProgress').innerHTML=error.message;
+          },
+          function(){
+              uploadTask.snapshot.ref.getDownloadURL().then(function(url){
+                  ImgUrl=url;
+
+
+              firebase.database().ref('pictures/'+ImgName).set({
+                  Name:ImgName,
+                  Link:ImgUrl
+              });
+          }
+          );
+        });
+
+        }
+        //=========================================================retrieve image=====================
+        document.getElementById('retrieve').onclick = function(){
+            ImgName = document.getElementById('namebox').value;
+            firebase.database().ref('pictures').child(ImgName).once('value', function(snapshot){
+                document.getElementById('myimg').src = snapshot.val().Link;
+            })
+        }
+        
+
+
+
+
+    </script>
+</body>
+
+</html>

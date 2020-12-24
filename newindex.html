@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+        </style>
+</head>
+<body>
+    <input type="text" id="text"><br><br>
+    <input type="text" id="selector">
+    <button onclick="myFunction()">CLICK ME</button><br><br>
+    <button onclick="my()">DELETE</button><br><br>
+ 
+    <style>
+        label{
+            display:block;
+        }
+        button{
+            display:block;
+        }
+       </style> 
+    <script>
+        
+    
+        function myFunction() {
+            var number1 = document.getElementById("text").value;
+            var number2 = document.getElementById("selector").value;
+            var result = number1 / number2;
+            var len = number2;
+            for(let i = 0; i < len; i++)
+            {
+                var division = document.createElement("label");
+                var labelOutput = document.createElement("label");
+                var labelOutputs = document.createElement("button");
+                labelOutput.setAttribute("id","lbl_"+i);
+                division.setAttribute("id","div"+i);
+                labelOutputs.setAttribute("id","btn_"+i);
+                labelOutput.innerHTML = i;
+                labelOutputs.innerHTML = "delete"+"<br>";
+                document.body.appendChild(division);                                                        
+                document.getElementById("div"+i).appendChild(labelOutput)
+                document.getElementById("div"+i).appendChild(labelOutputs)
+            }
+            for(let i = 0; i < len; i++){
+                document.getElementById("div"+i).style.border="2px solid black";
+                document.getElementById("div"+i).style.display="inline-block";
+                document.getElementById("btn_"+i).style.border="10px solid red"
+                document.getElementById("btn_"+i).onclick=function(){
+                    document.getElementById("btn_"+i).style.display="none";
+                    document.getElementById("lbl_"+i).style.display="none";
+                    document.getElementById("div"+i).style.display="none";
+                }
+            }
+    
+        }
+        function my(){
+          document.getElementById("lbl_4").style.display="none";
+          document.getElementById("btn_4").style.display="none";
+        }
+     
+        </script>
+</body>
+</html>

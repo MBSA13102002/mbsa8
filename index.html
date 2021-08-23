@@ -138,11 +138,27 @@
     .how {
         font-family: ABeeZee;
     }
-    .amounts{
+
+    .amounts {
         border-radius: 20px;
-        border:1px solid gray;
+        border: 1px solid gray;
         box-shadow: none;
         padding: 10px;
+    }
+
+    #left{
+        float: left;
+        width: 40%;
+  
+
+    }
+    #right{
+        float: right;
+        width: 40%;
+
+    }
+    #or{
+       font-size: 15px;
     }
 </style>
 
@@ -175,10 +191,14 @@
             <label for="flexCheckDefault" class="my-1 hide">Hide Identity</label>
         </div>
 
-        <h3 class="how">How much do you want <br>to contribute?</h3>
-        <input class="form-control data contri my-2" type="number" placeholder="Enter Amount"
+        <h3 class="how">How much do you want <br>to contribute:-</h3>
+        <input class="form-control data contri" type="number" placeholder="Enter Amount"
             aria-label="default input example" id="user_amount">
-        <hr>
+        <hr id="left" >
+        <i>or</i>
+        <hr id="right">
+       
+
         <button class="form-control data amounts my-2" type="text" onclick="fill(this)">₹1000</button>
         <button class="form-control data amounts my-2" type="text" onclick="fill(this)">₹500 </button>
         <button class="form-control data amounts my-2" type="text" onclick="fill(this)">₹300 </button>
@@ -213,16 +233,16 @@
 
         checkbox.addEventListener('change', function () {
             if (this.checked) {
-                document.getElementById("name_entry_box").value="Well-Wisher"
-                document.getElementById("name_entry_box").disabled=true
+                document.getElementById("name_entry_box").value = "Well-Wisher"
+                document.getElementById("name_entry_box").disabled = true
             } else {
-                document.getElementById("name_entry_box").value=""
-                document.getElementById("name_entry_box").disabled=false
+                document.getElementById("name_entry_box").value = ""
+                document.getElementById("name_entry_box").disabled = false
 
             }
         });
-        function fill(element){
-    document.getElementById("user_amount").value=parseInt(element.innerHTML.slice(1,))
+        function fill(element) {
+            document.getElementById("user_amount").value = parseInt(element.innerHTML.slice(1,))
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"

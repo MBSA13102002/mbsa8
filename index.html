@@ -149,17 +149,21 @@
     #left{
         float: left;
         width: 40%;
-  
 
+        
+        
     }
     #right{
         float: right;
         width: 40%;
 
+        
     }
     #or{
        font-size: 15px;
     }
+
+  
 </style>
 
 <body>
@@ -191,12 +195,15 @@
             <label for="flexCheckDefault" class="my-1 hide">Hide Identity</label>
         </div>
 
-        <h3 class="how">How much do you want <br>to contribute:-</h3>
-        <input class="form-control data contri" type="number" placeholder="Enter Amount"
+        <h3 class="how my-3">How much do you want <br>to contribute?</h3>
+        <input class="form-control data contri my-2" type="number" placeholder="Enter Amount"
             aria-label="default input example" id="user_amount">
-        <hr id="left" >
+     
+        <!-- <hr id="left"> -->
         <i>or</i>
-        <hr id="right">
+        <!-- <hr id="right"> -->
+
+        
        
 
         <button class="form-control data amounts my-2" type="text" onclick="fill(this)">₹1000</button>

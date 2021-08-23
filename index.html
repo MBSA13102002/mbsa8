@@ -158,7 +158,7 @@
         </label> -->
     <center>
         <!-- <p class="contri my-3">Contribution</p> -->
-         <h2 class="hide my-2" style="letter-spacing: 2px;"><b> Contribution</b></h2>
+        <h2 class="hide my-2" style="letter-spacing: 2px;"><b> Contribution</b></h2>
         <!-- <button class="black my-3"  type="button">CONTRIBUTION</button> -->
         <div class="card main_card m-3" style="width: 20rem;">
             <img src="./test.jpeg" class="card-img-top img " alt="..." height="200">
@@ -170,7 +170,6 @@
         <p class="card_down_text">Most Contributor's contribute approx ₹500 to this</p>
         <input class="form-control data contri" type="text" placeholder="Enter Your Name"
             aria-label="default input example" id="name_entry_box">
-        <h4 class="hide" style="color: brown;display: none;" id="name_label_well_wisher">Well-Wisher</h4>
         <div class="hide_div my-3">
             <input class="form-check-input my-2" type="checkbox" value="" id="flexCheckDefault" name="hide_identity">
             <label for="flexCheckDefault" class="my-1 hide">Hide Identity</label>
@@ -214,12 +213,11 @@
 
         checkbox.addEventListener('change', function () {
             if (this.checked) {
-                document.getElementById("name_label_well_wisher").style.display = "block";
-                document.getElementById("name_entry_box").style.display = "none";
-                document.getElementById("name_entry_box").value = "";
+                document.getElementById("name_entry_box").value="Well-Wisher"
+                document.getElementById("name_entry_box").disabled=true
             } else {
-                document.getElementById("name_label_well_wisher").style.display = "none";
-                document.getElementById("name_entry_box").style.display = "block";
+                document.getElementById("name_entry_box").value=""
+                document.getElementById("name_entry_box").disabled=false
 
             }
         });
